@@ -1,0 +1,225 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>聊天</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+ 
+    <body>
+        <div class="container">
+            <div class="leftSide">
+                <!--header-->
+                <div class="header">
+                    <div class="userimg">
+                        <img th:src="${user.getImg()}" class="cover">
+
+                    </div>
+                    <h4 th:text="${user.getUserName()}"><br></h4>
+                    <ul class="nav_icons">
+                        <li onclick="add()"><img src="/img/add.svg" style="width: 40px"></li>
+                        <li onclick="delete1()"><img src="/img/delete.svg" style="width: 40px"></li>
+                    </ul>
+                </div>
+                <!--search-->
+                <div class="search_chat">
+                    <div>
+                        <input class="addFriend" type="text" placeholder="添加好友">
+                        <img src="">
+                    </div>
+                </div>
+                <!--ChatList-->
+                <div class="cont">
+                    <div th:each="user3,status : ${users}" class="chatlist">
+                        <div class="block" onclick="acc(this)" >
+                            <div class="imgbx">
+                                <img th:src="${user3.getImg()}" class="cover">
+                            </div>
+                            <div class="details">
+                                <div class="listHead">
+                                    <h4 th:text="${user3.getUserName()}"></h4>
+                                    <p th:text="${#dates.format(lastMessage[status.index].date,'MM-dd HH:mm')}" class="time">2022/11/18 15:43:33</p>
+                                </div>
+                                <div class="message_p">
+                                    <p th:id="${user3.getUserID()}" th:text="${lastMessage[status.index].message}"></p>
+                                    <b class="hidden">0</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+ 
+
+ 
+                
+            </div>
+ 
+ 
+            <div class="rightSide">
+                <div class="header">
+                    <div class="imgText">
+                        <div class="userimg">
+<!--                            <img src="/img/user.svg" class="cover">-->
+                        </div>
+<!--                        <h4>开心果<br><span>在线</span></h4>-->
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">更多
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/person/info.html">修改个人信息</a></li>
+                            <li><a onclick="logout()" href="javascript:void(0);">退出登录</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+                <!--chatbox-->
+                <div class="border container1">
+                <div class="chatBox ">
+
+
+                </div>
+                    </div>
+                <!--chat input-->
+            <div class="chatbox_input">
+
+                <div>
+                    <input id="send_text" type="text">
+                </div>
+
+                    <button style="float: right"  type="button" class="btn btn-success" id="send_btn">发送</button>
+
+            </div>
+            </div>
+            
+        </div>
+    </body>
+    <script src="/js/jquery.js"></script>
+    <script>
+        let userID;
+        let users;
+
+        function acc(aaa){
+           $(".active").attr('class',"block")
+           $(aaa).attr('class',"block active");
+           var username=$(".active h4").text();
+            queryMessage(username)
+            $(".active b").text("0")
+            $(".active b").attr("class","hidden")
+        }
+        function add() {
+            $.ajax({
+                url:"/user/addFriend",
+                type:"post",
+                data:{username:$(".addFriend").val()},
+                success:function(data){
+                    if (data.judge){
+                        alert(data.message)
+                        addHTML(data.user)
+                    }else {
+                        alert(data.message)
+                    }
+
+                }});
+        }
+
+        function addHTML(user){
+        var d=  `<div class="chatlist">
+                <div class="block" onClick="acc(this)">
+                    <div class="imgbx">
+                        <img src="${user.img}" class="cover">
+                    </div>
+                    <div class="details">
+                        <div class="listHead">
+                            <h4>${user.userName}</h4>
+
+                        </div>
+                        <div class="message_p">
+
+                        </div>
+                    </div>
+                </div>
+            </div>`
+            $(".cont").html($(".cont").html()+d)
+        }
+        function delete1(){
+            var username = $(".active h4").text()
+
+            $.ajax({
+                url:"/user/deleteFriend",
+                type:"post",
+                data:{"username":username},
+                success:function(data){
+                    if (data.judge){
+                        alert(data.message)
+                        $(".active").parent().remove()
+                    }else {
+                        alert(data.message)
+                    }
+
+                }});
+        }
+        function queryMessage(name){
+            $.ajax({
+                url:"/user/userMessage",
+                type:"get",
+                data:{"username":name},
+                success:function(data){
+                    generateMessage(data)
+
+                }});
+        }
+        function generateMessage(data){
+            let d=""
+            for (let i=0;i<data.length;i++){
+
+                d=d+selectMessage(data[i])
+            }
+            $(".chatBox").html(d)
+        }
+        function selectMessage(user1){
+            let d=""
+            user1.date=new Date(user1.date).toLocaleString();
+            if (user1.from!=userID){
+                d=`<div class="message my_message">
+                        <p>${user1.message}<br><span>${user1.date}</span> </p>
+                    </div>`
+            }else {
+                d=` <div class="message frnd_message">
+                        <p>${user1.message}<br><span>${user1.date}</span> </p>
+                    </div>`
+            }
+            return d
+        }
+         function queryUserId(uu){
+            $.ajax({
+                url:"/user/queryUserId",
+                type:"get",
+                data:{},
+                success:function(data){
+                    userID=data
+                    uu(data)
+                }});
+        }
+        function addChat(user2){
+            $(".chatBox").html($(".chatBox").html()+selectMessage(user2))
+        }
+        function logout(){
+            $.ajax({
+                url:"/user/logout",
+                type:"get",
+                data:{},
+                success:function(data){
+                    window.location.href='/login/login.html';
+                }});
+        }
+    </script>
+    <script src="/js/bootstrap.min.js"></script>
+<script src="/js/websocket.js"></script>
+</html>

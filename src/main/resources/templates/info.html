@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adminage - Admin Dashboard</title>
+
+  <!-- favicon -->
+  <link rel="icon" href="/img/favicon.png" sizes="16x16" type="image/png" />
+
+  <!-- Stylesheet Link -->
+  <link rel="stylesheet" href="/css/style1.css" />
+  <link rel="stylesheet" href="/css/layui.css">
+
+</head>
+
+<body class="t-bg-primary mx-sidenav-not-collapsed">
+
+<!-- Preloader  -->
+
+<!-- Preloader End -->
+
+<!-- Side Nav / Display Only Small Screen  -->
+
+<!-- Side Nav / Display Only Small Screen  End-->
+
+<!-- Page Wrapper -->
+<div class="container-fluid p-0">
+  <div class="row g-0">
+    <!--SideNav / Display Only Small Screen  -->
+
+    <!--HSideNav/ Display Only Small Screen End -->
+
+    <!--SideNav / Display Only Large Screen  -->
+
+    <!--SideNav / Display Only Large Screen End -->
+
+    <div class="col-9 col-xxl-10 flex-grow-1">
+      <div class="container-fluid px-2 px-xxl-0">
+        <div class="row g-2 g-xxl-0">
+          <div class="col-12">
+            <div class="mx-body">
+
+              <header class="header sticky-top d-none d-xl-block">
+                <div class="primary-nav t-bg-primary">
+                  <div class="container-fluid px-0">
+                    <div class="row g-0">
+                      <div class="col-lg-12">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pagination t-bg-16">
+                  <div class="container-fluid px-0">
+                    <div class="row g-0">
+                      <div class="col-12">
+                        <ul class="pagination-bar t-list">
+                          <li class="pagination-bar__list">
+                            <a href="#"
+                               class="t-link pagination-bar__link text-capitalize">
+                              个人信息
+                            </a>
+                          </li>
+                          <li class="pagination-bar__list">
+                            <a href="#"
+                               class="t-link pagination-bar__link text-capitalize">
+                              个人信息
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </header>
+
+              <div class="mx-body__content" data-simplebar>
+
+                <fieldset class="layui-elem-field layui-field-title">
+                  <legend>审核信息</legend>
+                </fieldset>
+                <form class="layui-form" action="" id="test" lay-filter="test">
+                  <div class="layui-form-item">
+                    <div class="layui-inline">
+                      <label class="layui-form-label">用户名</label>
+                      <div class="layui-input-inline">
+                        <input type="text" id="teacher_name" name="teacher_name"  autocomplete="off" class="layui-input">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <div class="layui-inline">
+                      <label class="layui-form-label">密码</label>
+                      <div class="layui-input-inline">
+                        <input type="text" id="teacher_age" name="teacher_age"  autocomplete="off" class="layui-input">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">头像<span style="color: red;">*</span></label>
+                    <div class="layui-input-block">
+                      <div class="layui-upload">
+                        <input id="fileID" type="file">
+                        <div class="layui-upload-list">
+                          <img class="layui-upload-img" id="teacher_photo" name="teacher_photo" style="width: 300px ; height: 200px ;border: #9F9F9F">
+                          <p id="demoText"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button onclick="fileUpload()" type="button" class="layui-btn" lay-submit id="btnSubmit" style="margin-left: 110px" lay-filter="btnSubmit">保存</button>
+
+                </form>
+
+
+                <footer class="t-mb-30">
+                  <div class="container-fluid px-3">
+                    <div class="row g-3">
+                      <div class="col-12">
+                        <div
+                                class="t-pt-15 t-pb-15 cards t-bg-white t-shadow text-center sm-text">
+                          <span class="t-text-dark">&copy;</span> <a href="#"
+                                                                     class="t-link t-link--alpha text-capitalize">即时通信系统</a>
+                          <span class="t-text-dark text-capitalize">all right By <a href="">jr</a> 2022</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </footer>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page Wrapper End -->
+
+<!-- jquery -->
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+
+<!-- Date and Time  -->
+<script src="/js/moment.js"></script>
+<script src="/js/bootstrap-material-datetimepicker.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<!-- Slick Slider  -->
+<script src="/js/slick.min.js"></script>
+<!-- Owl carousel -->
+<script src="/js/owl.carousel.min.js"></script>
+<!-- simplebar -->
+<script src="/js/simplebar.js"></script>
+<!-- Prism JS  -->
+<script src="/js/prism.js"></script>
+<!-- Feather Icon  -->
+<script src="/js/feather.js"></script>
+<!-- Nice Select  -->
+<script src="/js/jquery.nice-select.min.js"></script>
+<!-- Dropzone  -->
+<script src="/js/dropzone.js"></script>
+<!-- ION Range Slider  -->
+<script src="/js/ion.rangeSlider.js"></script>
+<!-- Touchspin  -->
+<script src="/js/jquery.bootstrap-touchspin.min.js"></script>
+<!-- Rating Bar -->
+<script src="/js/jquery.barrating.min.js"></script>
+<!-- Calendar  -->
+<script src="/js/fullcalendar.min.js"></script>
+<!-- Apexchart  -->
+<script src="/js/apexcharts.js"></script>
+<script src="/js/chart-dash-1.js"></script>
+<!-- Main script -->
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+
+  function fileUpload(){
+
+    var formData = new FormData();
+    formData.append('file', $('#fileID')[0].files[0]);
+    formData.append("username",$("#teacher_name").val());
+    formData.append("password",$("#teacher_age").val());
+    $.ajax({
+      url: 'http://localhost:8080/person/fileUpload',
+      type: 'POST',
+      cache: false,
+      data: formData,
+      processData: false,
+      contentType: false,
+      success:function(data){
+        if (data){
+          alert("修改成功")
+          window.location.href='/user/chat.html';
+        }else {
+          alert("修改失败")
+
+        }
+
+      }
+    }).done(function(res) {
+    }).fail(function(res) {});
+  }
+
+</script>
+
+</body>
+
+</html>
