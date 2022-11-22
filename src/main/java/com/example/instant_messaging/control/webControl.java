@@ -35,10 +35,15 @@ public class webControl {
         Message[]lastMessage=new Message[users.length];
         for (int i=0;i<lastMessage.length;i++){
             ArrayList<Message>m=dao.selectMessage(id,users[i].getUserID());
-            if (m.size()==0){continue;}
+            if (m.size()==0){
+                lastMessage[i]=new Message();
+                lastMessage[i].message="";
+                lastMessage[i].date=null;
+                continue;}
             lastMessage[i]=m.get(m.size()-1);
         }
         User user=dao.selectById(id);
+
         mv.addObject("lastMessage",lastMessage);
         mv.addObject("users",users);
         mv.addObject("user",user);
